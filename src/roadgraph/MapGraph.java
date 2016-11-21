@@ -23,15 +23,13 @@ import geography.GeographicPoint;
 import util.GraphLoader;
 
 /**
- * @author UCSD MOOC development team and YOU
+ * @author Hao Zhang
  * 
  * A class which represents a graph of geographic locations
  * Nodes in the graph are intersections between 
  *
  */
 public class MapGraph {
-	//TODO: Add your member variables here in WEEK 2
-	
 	// Member variable constructs Adjacency List. Each start GeographicPoint maps 
 	// to a list (HashMap) of end GeographicPoints, each of which maps to road object including
 	// road information
@@ -50,7 +48,6 @@ public class MapGraph {
 	 */
 	public MapGraph()
 	{
-		// TODO: Implement in this constructor in WEEK 2
 		map = new HashMap<GeographicPoint, Map<GeographicPoint, Road>>();
 		//mapDistance = new HashMap<GeographicPoint, Distance>();
 		mapDuration = new HashMap<GeographicPoint, Duration>();
@@ -64,7 +61,6 @@ public class MapGraph {
 	 */
 	public int getNumVertices()
 	{
-		//TODO: Implement this method in WEEK 2
 		return map.size();
 	}
 	
@@ -74,7 +70,6 @@ public class MapGraph {
 	 */
 	public Set<GeographicPoint> getVertices()
 	{
-		//TODO: Implement this method in WEEK 2
 		return map.keySet();
 	}
 	
@@ -84,7 +79,6 @@ public class MapGraph {
 	 */
 	public int getNumEdges()
 	{
-		//TODO: Implement this method in WEEK 2
 		int size = 0;
 		for (Map.Entry<GeographicPoint, Map<GeographicPoint, Road>> entry : map.entrySet())
 			size += entry.getValue().size();
@@ -102,7 +96,6 @@ public class MapGraph {
 	 */
 	public boolean addVertex(GeographicPoint location)
 	{
-		// TODO: Implement this method in WEEK 2
 		if (location == null)
 			return false;
 		for (GeographicPoint v : map.keySet())
@@ -132,7 +125,6 @@ public class MapGraph {
 	 */
 	public void addEdge(GeographicPoint from, GeographicPoint to, String roadName,
 			String roadType, double length) throws IllegalArgumentException {
-		//TODO: Implement this method in WEEK 2
 		if (from == null || to == null)
 			throw new IllegalArgumentException("GeographicPoints cannot be null.");
 		if (length == 0)
@@ -160,17 +152,13 @@ public class MapGraph {
 	 * 
 	 * @param start The starting location
 	 * @param goal The goal location
-	 * @param nodeSearched A hook for visualization.  See assignment instructions for how to use it.
+	 * @param nodeSearched A hook for visualization.
 	 * @return The list of intersections that form the shortest (unweighted)
 	 *   path from start to goal (including both start and goal).
 	 */
 	public List<GeographicPoint> bfs(GeographicPoint start, 
 			 					     GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
-		// TODO: Implement this method in WEEK 2
-		
-		// Hook for visualization.  See writeup.
-		//nodeSearched.accept(next.getLocation());
 		List<GeographicPoint> list = new ArrayList<GeographicPoint>();
 		// If start or goal is not in graph, return null.
 		if (!map.containsKey(start) || !map.containsKey(goal))	
@@ -183,6 +171,7 @@ public class MapGraph {
 		while (queue.size() != 0)
 		{
 			GeographicPoint curr = queue.remove();
+			// Hook for visualization.
 			nodeSearched.accept(curr);
 			//if goal is found, add goal as the first GeographicPoint in the result list and break loop.
 			if (curr.distance(goal) == 0)
@@ -226,7 +215,6 @@ public class MapGraph {
 	 */
 	public List<GeographicPoint> dijkstra(GeographicPoint start, GeographicPoint goal) {
 		// Dummy variable for calling the search algorithms
-		// You do not need to change this method.
         Consumer<GeographicPoint> temp = (x) -> {};
         return dijkstra(start, goal, temp);
 	}
@@ -235,15 +223,12 @@ public class MapGraph {
 	 * 
 	 * @param start The starting location
 	 * @param goal The goal location
-	 * @param nodeSearched A hook for visualization.  See assignment instructions for how to use it.
+	 * @param nodeSearched A hook for visualization.
 	 * @return The list of intersections that form the shortest path from 
 	 *   start to goal (including both start and goal).
 	 */
 	/*public List<GeographicPoint> dijkstra(GeographicPoint start, GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
-		// TODO: Implement this method in WEEK 3
-		// Hook for visualization.  See writeup.
-		//nodeSearched.accept(next.getLocation());
 		List<GeographicPoint> list = new ArrayList<GeographicPoint>();
 		if (!map.containsKey(start) || !map.containsKey(goal))	
 			return null;
@@ -257,6 +242,7 @@ public class MapGraph {
 		{
 			GeographicPoint curr = pq.poll().getPoint();
 			count++;
+			// Hook for visualization.
 			nodeSearched.accept(curr);
 			if (!visited.contains(curr))
 			{
@@ -298,8 +284,6 @@ public class MapGraph {
 	// Find the path with shortest trip duration from start to goal using Dijkstra's algorithm
 	public List<GeographicPoint> dijkstra(GeographicPoint start, GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
-		// Hook for visualization.  See writeup.
-		//nodeSearched.accept(next.getLocation());
 		List<GeographicPoint> list = new ArrayList<GeographicPoint>();
 		if (!map.containsKey(start) || !map.containsKey(goal))	
 			return null;
@@ -313,6 +297,7 @@ public class MapGraph {
 		{
 			GeographicPoint curr = pq.poll().getPoint();
 			count++;
+			// Hook for visualization.
 			nodeSearched.accept(curr);
 			if (!visited.contains(curr))
 			{
@@ -369,16 +354,12 @@ public class MapGraph {
 	 * 
 	 * @param start The starting location
 	 * @param goal The goal location
-	 * @param nodeSearched A hook for visualization.  See assignment instructions for how to use it.
+	 * @param nodeSearched A hook for visualization.
 	 * @return The list of intersections that form the shortest path from 
 	 *   start to goal (including both start and goal).
 	 */
 	/*public List<GeographicPoint> aStarSearch(GeographicPoint start, GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
-		// TODO: Implement this method in WEEK 3
-		
-		// Hook for visualization.  See writeup.
-		//nodeSearched.accept(next.getLocation());
 		List<GeographicPoint> list = new ArrayList<GeographicPoint>();
 		if (!map.containsKey(start) || !map.containsKey(goal))	
 			return null;
@@ -393,6 +374,7 @@ public class MapGraph {
 		{
 			GeographicPoint curr = pq.poll().getPoint();
 			count++;
+			// Hook for visualization.
 			nodeSearched.accept(curr);
 			if (!visited.contains(curr))
 			{
@@ -501,14 +483,6 @@ public class MapGraph {
 		GraphLoader.loadRoadMap("data/testdata/simpletest.map", firstMap);
 		System.out.println("DONE.");
 		
-		// You can use this method for testing.  
-		
-		
-		/* Here are some test cases you should try before you attempt 
-		 * the Week 3 End of Week Quiz, EVEN IF you score 100% on the 
-		 * programming assignment.
-		 */
-		
 		/*MapGraph simpleTestMap = new MapGraph();
 		GraphLoader.loadRoadMap("data/testdata/simpletest.map", simpleTestMap);
 		
@@ -538,23 +512,6 @@ public class MapGraph {
 		testroute = testMap.dijkstra(testStart,testEnd);
 		testroute2 = testMap.aStarSearch(testStart,testEnd);
 		*/
-		
-		
-		/* Use this code in Week 3 End of Week Quiz */
-		/*MapGraph theMap = new MapGraph();
-		System.out.print("DONE. \nLoading the map...");
-		GraphLoader.loadRoadMap("data/maps/utc.map", theMap);
-		System.out.println("DONE.");
-
-		GeographicPoint start = new GeographicPoint(32.8648772, -117.2254046);
-		GeographicPoint end = new GeographicPoint(32.8660691, -117.217393);
-		
-		
-		List<GeographicPoint> route = theMap.dijkstra(start,end);
-		List<GeographicPoint> route2 = theMap.aStarSearch(start,end);
-		*/
-		
-		
 	}
 	
 }
