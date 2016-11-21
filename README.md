@@ -12,4 +12,4 @@ How to use:
 4. You can choose different routing algorithms or visualize the process.
 
 
-UCSD MOOC development team implemenedt front-end of application.
+UCSD MOOC development team implemented front-end of application.
